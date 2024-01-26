@@ -9,7 +9,7 @@ Package for read and vizualize SMC simulations results.
 ```python
 # MallaSMC class represents a structured mesh for SMC (SistemadeModelado Costero) simulations.
 MallaSMC(meshName, moplaPath)
-
+```
 Attributes:
     - name (str): The name of the mesh.
     - moplaPath (str): The path where Mopla files are located.
@@ -27,39 +27,39 @@ Attributes:
     - x (numpy.ndarray): X-coordinates of the mesh.
     - y (numpy.ndarray): Y-coordinates of the mesh.
     - z (numpy.ndarray): Bathymetry data of the mesh.
-```
+
 
 * readData:
 ```python
 # Reads and processes wave height and direction data for a given mesh and case.
 hs, dd = readData(MallaSMC, caso)
-
+```
 Parameters:
     - malla (MallaSMC): The MallaSMC object representing the mesh.
     - caso (str): The case identifier.
 Returns:
     - Tuple: Tuple containing wave height (hs) and direction (dd) data arrays.
-```
+
 
 * readDataCOPLA:
 ```python
 # Reads and processes velocity field data from COPLA simulations.
 V, vx, vy = readDataCOPLA(MallaSMC, caso)
-
+```
 Parameters:
     - malla (MallaSMC): The MallaSMC object representing the mesh.
     - caso (str): The case identifier.
 
 Returns:
     - Tuple: Tuple containing velocity (V), velocity x-component (vx), and velocity y-component (vy) data arrays
-```
+
 
 * readDataMC:
 ```python
-# Reads and processes data for Monte Carlo simulations.
+# Reads and processes data for monochromatic simulations.
 
 eta, dd, hs, phase, phasez, rot, YY, XX = readDataMC(malla, caso, zoomFlag)
-
+```
 Parameters:
     - malla (MallaSMC): The MallaSMC object representing the mesh.
     - caso (str): The case identifier.
@@ -67,7 +67,7 @@ Parameters:
 
 Returns:
     - Tuple: Tuple containing free surface elevation (eta), direction (dd), height (hs), phase, phase zoom (phasez), breaking points (rot), YY, and XX data arrays.
-```
+
 
 ## :package: Package structures
 ````
