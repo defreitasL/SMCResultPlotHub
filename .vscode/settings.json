@@ -7,4 +7,5 @@
     "files.associations": {
         ".env.*": "env",
     },
+    "workbench.colorTheme": "Dracula Soft",
 }
