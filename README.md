@@ -10,6 +10,7 @@ Package for read and vizualize SMC simulations results.
 # MallaSMC class represents a structured mesh for SMC (SistemadeModelado Costero) simulations.
 MallaSMC(meshName, moplaPath)
 ```
+```
 Attributes:
     - name (str): The name of the mesh.
     - moplaPath (str): The path where Mopla files are located.
@@ -27,24 +28,26 @@ Attributes:
     - x (numpy.ndarray): X-coordinates of the mesh.
     - y (numpy.ndarray): Y-coordinates of the mesh.
     - z (numpy.ndarray): Bathymetry data of the mesh.
-
+```
 
 * readData:
 ```python
 # Reads and processes wave height and direction data for a given mesh and case.
 hs, dd = readData(MallaSMC, caso)
 ```
+```
 Parameters:
     - malla (MallaSMC): The MallaSMC object representing the mesh.
     - caso (str): The case identifier.
 Returns:
     - Tuple: Tuple containing wave height (hs) and direction (dd) data arrays.
-
+```
 
 * readDataCOPLA:
 ```python
 # Reads and processes velocity field data from COPLA simulations.
 V, vx, vy = readDataCOPLA(MallaSMC, caso)
+```
 ```
 Parameters:
     - malla (MallaSMC): The MallaSMC object representing the mesh.
@@ -52,7 +55,7 @@ Parameters:
 
 Returns:
     - Tuple: Tuple containing velocity (V), velocity x-component (vx), and velocity y-component (vy) data arrays
-
+```
 
 * readDataMC:
 ```python
@@ -60,14 +63,15 @@ Returns:
 
 eta, dd, hs, phase, phasez, rot, YY, XX = readDataMC(malla, caso, zoomFlag)
 ```
-Parameters:
+```
+Parameters: 
     - malla (MallaSMC): The MallaSMC object representing the mesh.
     - caso (str): The case identifier.
     - zoomFlag (bool): Flag indicating whether the case was executed with zoom.
 
 Returns:
     - Tuple: Tuple containing free surface elevation (eta), direction (dd), height (hs), phase, phase zoom (phasez), breaking points (rot), YY, and XX data arrays.
-
+```
 
 ## :package: Package structures
 ````
@@ -92,6 +96,7 @@ SMCResultPlotHub
 └── .gitignore
 
 ````
+
 ## :house: Local installation
 * Using conda + pip:
 ```bash
@@ -99,24 +104,8 @@ SMCResultPlotHub
 
 # pip install git+https://github.com/defreitasL/SMCResultPlotHub.git
 
-```bash
----
-## :recycle: Continuous integration (CI)
-
-* Pre-commit with **black formatter** hook on `commit`. ([.pre-commit-config.yaml](https://github.com/IHCantabria/TESEO.Apiprocess/blob/main/.pre-commit-config.yaml))
-* Github workflow with conda based **deployment** and **testing** on `tag`. ([Github action](https://github.com/IHCantabria/TESEO.Apiprocess/blob/main/.github/workflows/main.yml))
-
-
----
-## :heavy_check_mark: Testing
-* To run tests manually:
-```bash
-# Unzip data for testing stored in "data.zip" in "tests/" folder
-7z x tests/data.zip -otests/ 
-
-# Run pytests from console
-pytest
 ```
+
 ---
 
 ## :incoming_envelope: Contact us
