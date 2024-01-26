@@ -13,8 +13,7 @@ methodX(arg_1=1, arg_2='aaa')
 
 ```
 
-## :package: Package structure
-Reminder--> *command: `tree -AC -I __pycache__`*
+## :package: Package structures
 ````
 TESEO.Apiprocess
 |
