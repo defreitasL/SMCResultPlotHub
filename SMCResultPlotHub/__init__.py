@@ -7,3 +7,4 @@ from .MallaSMC import MallaSMC
 from .perfRot import perfRot
 from .poi import poi
 from .readData import readData, readDataCOPLA, readDataMC
+from .utils.utils import wMOORE, Hunt, memclear
