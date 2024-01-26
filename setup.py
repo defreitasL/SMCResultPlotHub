@@ -3,7 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name='SMCResultPlotHub',
     version='0.1',
-    packages=find_packages(),
+    packages=find_packages(where='SMCResultPlotHub'),
+    package_dir={'': 'SMCResultPlotHub'},
     include_package_data=True,
     install_requires=[
         'numpy',
