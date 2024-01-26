@@ -11,6 +11,7 @@ setup(
         'scipy',
         'matplotlib',
         'pandas',
+        'mat73'
         # Adicione aqui outras dependências, se necessário
     ],
     author='Lucas de Freitas Pereira',
