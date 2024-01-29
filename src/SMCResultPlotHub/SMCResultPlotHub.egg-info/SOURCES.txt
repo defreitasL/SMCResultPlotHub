@@ -1,0 +1,8 @@
+LICENSE
+README.md
+setup.py
+src/SMCResultPlotHub/SMCResultPlotHub.egg-info/PKG-INFO
+src/SMCResultPlotHub/SMCResultPlotHub.egg-info/SOURCES.txt
+src/SMCResultPlotHub/SMCResultPlotHub.egg-info/dependency_links.txt
+src/SMCResultPlotHub/SMCResultPlotHub.egg-info/requires.txt
+src/SMCResultPlotHub/SMCResultPlotHub.egg-info/top_level.txt
