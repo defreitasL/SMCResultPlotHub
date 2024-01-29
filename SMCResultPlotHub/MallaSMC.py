@@ -2,7 +2,7 @@ import numpy as np
 
 class MallaSMC:
     """
-    MallaSMC class represents a structured mesh for SMC (Sea-state Model Coupling) simulations.
+    MallaSMC class represents a structured mesh for SMC (SistemadeModelado Costero) simulations.
 
     Attributes:
     - name (str): The name of the mesh.
@@ -38,7 +38,7 @@ class MallaSMC:
         self.moplaPath = moplaPath
 
         # Reading MallaREF file
-        mallaREF = open(moplaPath + '\\' + name + 'REF2.DAT', 'r')
+        mallaREF = open(moplaPath + '/' + name + 'REF2.DAT', 'r')
         mallaREF = mallaREF.read()
         mallaREF = mallaREF.replace('\n', ' ')
         mallaREF = mallaREF.replace('  ', ' ')
@@ -57,7 +57,7 @@ class MallaSMC:
         X, Y = np.meshgrid(xx, yy)
 
         # Reading bathymetry data
-        bathy = open(moplaPath + '\\RD\\' + name + '_Bathymetry_Inp.grd', 'r')
+        bathy = open(moplaPath + '/RD/' + name + '_Bathymetry_Inp.grd', 'r')
         bathy = bathy.read()
         for i in range(7):
             bathy = bathy.replace('  ', ' ')

@@ -11,7 +11,7 @@ def readData(malla, caso):
     Returns:
     - Tuple: Tuple containing height (hs) and direction (dd) data arrays.
     """
-    hsField = open(malla.moplaPath + '\\SP\\' + malla.name + caso + '_Height.GRD', 'r')
+    hsField = open(malla.moplaPath + '/SP/' + malla.name + caso + '_Height.GRD', 'r')
     hsField = hsField.read()
     for i in range(7):
         hsField = hsField.replace('  ', ' ')
@@ -24,7 +24,7 @@ def readData(malla, caso):
     mkFl = np.vectorize(lambda i: float(hsField[i + 8]))
     hs = mkFl(range(len(hsField[8:-1]) + 1)).reshape(malla.nx, malla.ny)
 
-    dirField = open(malla.moplaPath + '\\SP\\' + malla.name + caso + '_Direction.GRD', 'r')
+    dirField = open(malla.moplaPath + '/SP/' + malla.name + caso + '_Direction.GRD', 'r')
     dirField = dirField.read()
     for i in range(7):
         dirField = dirField.replace('  ', ' ')
@@ -51,7 +51,7 @@ def readDataCOPLA(malla, caso):
     Returns:
     - Tuple: Tuple containing velocity (V), velocity x-component (vx), and velocity y-component (vy) data arrays.
     """
-    Field = open(malla.moplaPath + '\\SP\\' + malla.name + caso + '_VelMod.GRD', 'r')
+    Field = open(malla.moplaPath + '/SP/' + malla.name + caso + '_VelMod.GRD', 'r')
     Field = Field.read()
     for i in range(7):
         Field = Field.replace('  ', ' ')
@@ -64,7 +64,7 @@ def readDataCOPLA(malla, caso):
     mkFl = np.vectorize(lambda i: float(Field[i + 8]))
     U = mkFl(range(len(Field[8:-1]) + 1)).reshape(malla.nx - 2, malla.ny - 2)
 
-    Field = open(malla.moplaPath + '\\SP\\' + malla.name + caso + '_VelUx.GRD', 'r')
+    Field = open(malla.moplaPath + '/SP/' + malla.name + caso + '_VelUx.GRD', 'r')
     Field = Field.read()
     for i in range(7):
         Field = Field.replace('  ', ' ')
@@ -77,7 +77,7 @@ def readDataCOPLA(malla, caso):
     mkFl = np.vectorize(lambda i: float(Field[i + 8]))
     ux = mkFl(range(len(Field[8:-1]) + 1)).reshape(malla.nx - 2, malla.ny - 2)
 
-    Field = open(malla.moplaPath + '\\SP\\' + malla.name + caso + '_VelUy.GRD', 'r')
+    Field = open(malla.moplaPath + '/SP/' + malla.name + caso + '_VelUy.GRD', 'r')
     Field = Field.read()
     for i in range(7):
         Field = Field.replace('  ', ' ')
@@ -119,7 +119,7 @@ def readDataMC(malla, caso, zoomFlag):
     Returns:
     - Tuple: Tuple containing free surface elevation (eta), direction (dd), height (hs), phase, phase zoom, rotation, YY, and XX data arrays.
     """
-    fsField = open(malla.moplaPath + '\\RD\\' + malla.name + caso + '_FreeSrf.GRD', 'r')
+    fsField = open(malla.moplaPath + '/RD/' + malla.name + caso + '_FreeSrf.GRD', 'r')
     fsField = fsField.read()
     for i in range(7):
         fsField = fsField.replace('  ', ' ')
@@ -132,7 +132,7 @@ def readDataMC(malla, caso, zoomFlag):
     mkFl = np.vectorize(lambda i: float(fsField[i + 8]))
     eta = mkFl(range(len(fsField[8:-1]) + 1)).reshape(malla.nx, malla.ny)
 
-    dirField = open(malla.moplaPath + '\\RD\\' + malla.name + caso + '_Direction.GRD', 'r')
+    dirField = open(malla.moplaPath + '/RD/' + malla.name + caso + '_Direction.GRD', 'r')
     dirField = dirField.read()
     for i in range(7):
         dirField = dirField.replace('  ', ' ')
@@ -147,7 +147,7 @@ def readDataMC(malla, caso, zoomFlag):
 
     dd = -dd + malla.angMalla
 
-    hsField = open(malla.moplaPath + '\\RD\\' + malla.name + caso + '_Height.GRD', 'r')
+    hsField = open(malla.moplaPath + '/RD/' + malla.name + caso + '_Height.GRD', 'r')
     hsField = hsField.read()
     for i in range(7):
         hsField = hsField.replace('  ', ' ')
@@ -161,7 +161,7 @@ def readDataMC(malla, caso, zoomFlag):
     hs = mkFl(range(len(hsField[8:-1]) + 1)).reshape(malla.nx, malla.ny)
 
     if zoomFlag:
-        zum = open(malla.moplaPath + '\\RD\\' + malla.name + caso + 'zum.dat', 'r')
+        zum = open(malla.moplaPath + '/RD/' + malla.name + caso + 'zum.dat', 'r')
         zumTOT = zum.read()
         zumTOT = zumTOT.replace('\n', ' ')
         for i in range(7):
@@ -202,7 +202,7 @@ def readDataMC(malla, caso, zoomFlag):
         XX = Xz * np.cos(malla.angMalla) - Yz * np.sin(malla.angMalla) + malla.x0o
         YY = Yz * np.cos(malla.angMalla) + Xz * np.sin(malla.angMalla) + malla.y0o
 
-        rot = open(malla.moplaPath + '\\RD\\' + malla.name + caso + 'rot.dat', 'r')
+        rot = open(malla.moplaPath + '/RD/' + malla.name + caso + 'rot.dat', 'r')
         rotTOT = rot.read()
         rotTOT = rotTOT.replace('\n', ' ')
         for i in range(7):
@@ -215,7 +215,7 @@ def readDataMC(malla, caso, zoomFlag):
 
         return np.flipud(eta.T), np.flipud(dd.T), np.flipud(hs.T), np.flipud(phase.T), phasez.T, rot.T, YY, XX
     else:
-        phaseField = open(malla.moplaPath + '\\RD\\' + malla.name + caso + '_Phase.GRD', 'r')
+        phaseField = open(malla.moplaPath + '/RD/' + malla.name + caso + '_Phase.GRD', 'r')
         phaseField = phaseField.read()
         for i in range(7):
             phaseField = phaseField.replace('  ', ' ')
