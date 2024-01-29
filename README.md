@@ -2,6 +2,15 @@
 # SMCResultPlotHub
 Package for read and vizualize SMC simulations results.
 
+## :house: Local installation
+* Using conda + pip:
+```bash
+# Create conda env and install python libreries
+
+# pip install git+https://github.com/defreitasL/SMCResultPlotHub.git
+
+```
+
 ---
 ## :zap: Main methods
 
@@ -96,15 +105,6 @@ SMCResultPlotHub
 └── .gitignore
 
 ````
-
-## :house: Local installation
-* Using conda + pip:
-```bash
-# Create conda env and install python libreries
-
-# pip install git+https://github.com/defreitasL/SMCResultPlotHub.git
-
-```
 
 ---
 
