@@ -1,7 +1,8 @@
 # FOLDERS 
-.vscode/*
+./.vscode
 tests/data
 env
+./src/_pycache__
 
 # FILES
 .env
