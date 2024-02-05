@@ -2,10 +2,10 @@ LICENSE
 README.md
 setup.py
 SMCResultPlotHub/EMD.py
-SMCResultPlotHub/MallaSMC.py
 SMCResultPlotHub/__init__.py
 SMCResultPlotHub/graphEMD.py
 SMCResultPlotHub/graphOLUCA.py
+SMCResultPlotHub/meshSMC.py
 SMCResultPlotHub/perfRot.py
 SMCResultPlotHub/poi.py
 SMCResultPlotHub/readData.py

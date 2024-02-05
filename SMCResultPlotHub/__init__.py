@@ -3,7 +3,7 @@
 # Import modules and functions from your package here
 from .EMD import EMD
 from .graphEMD import graphEMD
-from .MallaSMC import MallaSMC
+from .meshSMC import meshSMC
 from .perfRot import perfRot
 from .poi import poi
 from .readData import readData, readDataCOPLA, readDataMC

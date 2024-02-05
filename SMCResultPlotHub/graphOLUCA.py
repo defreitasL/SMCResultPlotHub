@@ -7,15 +7,14 @@ Created on Mon Feb 20 14:07:49 2023
 import numpy as np
 import matplotlib.pyplot as plt
 import dxfgrabber
-from readData import readData, readDataCOPLA
 # AA = [H, T, SL, DIR]
 
-def graphHsDir(malla, caseConfig, graphConfig):
+def graphHsDir(mesh, caseConfig, graphConfig):
     """
     Graphs the significant wave height and direction for a given case.
 
     Parameters:
-    - malla (MallaSMC): The MallaSMC object representing the mesh.
+    - mesh (meshSMC): The meshSMC object representing the mesh.
     - caseKey (str): The case identifier.
     - AA (numpy.ndarray): The array containing the cases to be plotted.
     - it (int): The index of the case to be plotted.
@@ -72,29 +71,29 @@ def graphHsDir(malla, caseConfig, graphConfig):
     lblDir = caseConfig["lblDir"]
     lblEta = caseConfig["lblEta"]  
 
-    Hs, Dir = readData(malla, caseKey)
-    Hs[malla.z <= -seaLvl] = float("nan")
+    Hs, Dir = readData(mesh, caseKey)
+    Hs[mesh.z <= -seaLvl] = float("nan")
     Hsx, Hsy = Hs/np.nanmax(Hs) * np.sin(np.radians(Dir)), -Hs/np.nanmax(Hs) * np.cos(np.radians(Dir))
 
-    idxZoom = np.logical_or(np.logical_or(np.logical_or(malla.x<zoom[0],malla.x>zoom[1]),malla.y<zoom[2]),malla.y>zoom[3])
+    idxZoom = np.logical_or(np.logical_or(np.logical_or(mesh.x<zoom[0],mesh.x>zoom[1]),mesh.y<zoom[2]),mesh.y>zoom[3])
     Hs[idxZoom] = float("nan")
     Hsx[idxZoom] = float("nan")
-    Hsx[malla.z <= -seaLvl] = float("nan")
+    Hsx[mesh.z <= -seaLvl] = float("nan")
     Hsy[idxZoom] = float("nan")
-    Hsy[malla.z <= -seaLvl] = float("nan")
+    Hsy[mesh.z <= -seaLvl] = float("nan")
 
     plt.figure(figsize=figureSize, dpi=400, linewidth=5, edgecolor="#04253a")
     plt.ylabel('Y [UTM]', fontdict=font)
     plt.xlabel('X [UTM]', fontdict=font)
     # plt.axis('equal')
     plt.imshow(img, extent = corners)
-    plt.contourf(malla.x, malla.y, Hs, levels, vmin=min(levels),
+    plt.contourf(mesh.x, mesh.y, Hs, levels, vmin=min(levels),
                     vmax=max(levels), cmap=cmapHs, extend='max',alpha=1)
     plt.clim(min(levels), max(levels))
     color_bar = plt.colorbar(ticks=tks)
     color_bar.minorticks_on()
     color_bar.set_label(label=r'$H_s$ [m]', weight='bold', size=10)
-    plt.quiver(malla.x[0::spcH,0::spcV],malla.y[0::spcH,0::spcV],Hsx[0::spcH,0::spcV],
+    plt.quiver(mesh.x[0::spcH,0::spcV],mesh.y[0::spcH,0::spcV],Hsx[0::spcH,0::spcV],
             Hsy[0::spcH,0::spcV],
             scale=arrowScale,
             width= arrowWidth,
@@ -136,12 +135,12 @@ def graphHsDir(malla, caseConfig, graphConfig):
     plt.savefig(fileName)
     plt.show()
 
-def graphCopla(malla, caseConfig, graphConfig):
+def graphCopla(mesh, caseConfig, graphConfig):
     """
     Graphs the significant wave height and direction for a given case.
 
     Parameters:
-    - malla (MallaSMC): The MallaSMC object representing the mesh.
+    - mesh (meshSMC): The meshSMC object representing the mesh.
     - caseKey (str): The case identifier.
     - AA (numpy.ndarray): The array containing the cases to be plotted.
     - it (int): The index of the case to be plotted.
@@ -198,14 +197,14 @@ def graphCopla(malla, caseConfig, graphConfig):
     lblDir = caseConfig["lblDir"]
     lblEta = caseConfig["lblEta"]
 
-    idxZoom = np.logical_or(np.logical_or(np.logical_or(malla.x<zoom[0],malla.x>zoom[1]),malla.y<zoom[2]),malla.y>zoom[3])
-    U, ux, uy = readDataCOPLA(malla, caseKey)
+    idxZoom = np.logical_or(np.logical_or(np.logical_or(mesh.x<zoom[0],mesh.x>zoom[1]),mesh.y<zoom[2]),mesh.y>zoom[3])
+    U, ux, uy = readDataCOPLA(mesh, caseKey)
     U[idxZoom] = float("nan")
-    U[malla.z <= -seaLvl] = float("nan")
+    U[mesh.z <= -seaLvl] = float("nan")
     ux[idxZoom] = float("nan")
-    ux[malla.z <= -seaLvl] = float("nan")
+    ux[mesh.z <= -seaLvl] = float("nan")
     uy[idxZoom] = float("nan")
-    uy[malla.z <= -seaLvl] = float("nan")
+    uy[mesh.z <= -seaLvl] = float("nan")
 
     # ux[U<0.1] = float("nan")
     # uy[U<0.1] = float("nan")
@@ -220,13 +219,13 @@ def graphCopla(malla, caseConfig, graphConfig):
     # plt.axis('equal')
     # plt.pcolormesh(xIMG,yIMG,img)
     plt.imshow(img, extent = corners)
-    plt.contourf(malla.x, malla.y, U, levels, vmin=min(levels),
+    plt.contourf(mesh.x, mesh.y, U, levels, vmin=min(levels),
                     vmax=max(levels), cmap=cmapVel, extend='max',alpha=1)
     plt.clim(min(levels), max(levels))
     color_bar = plt.colorbar(ticks=tks)
     color_bar.minorticks_on()
     color_bar.set_label(label=r'$U$ [m/s]', weight='bold', size=10)
-    plt.quiver(malla.x[0::spcH,0::spcV],malla.y[0::spcH,0::spcV],-ux[0::spcH,0::spcV],
+    plt.quiver(mesh.x[0::spcH,0::spcV],mesh.y[0::spcH,0::spcV],-ux[0::spcH,0::spcV],
                 uy[0::spcH,0::spcV],
                 scale=arrowScale,
                 width= arrowWidth,
@@ -267,7 +266,7 @@ def graphCopla(malla, caseConfig, graphConfig):
     plt.gca().set_yticklabels(['{:.0f}'.format(x) for x in plt.gca().get_yticks()])
     plt.savefig(fileName)
 
-def graphBrk(malla, caseConfig, graphConfig):
+def graphBrk(mesh, caseConfig, graphConfig):
     
     # graph parameters
     EPSGdict = dict(boxstyle="round",
@@ -312,19 +311,19 @@ def graphBrk(malla, caseConfig, graphConfig):
     lblDir = caseConfig["lblDir"]
     lblEta = caseConfig["lblEta"]  
 
-    Hs, Dir = readData(malla, caseKey)
-    Hs[malla.z <= -seaLvl] = float("nan")
+    Hs, Dir = readData(mesh, caseKey)
+    Hs[mesh.z <= -seaLvl] = float("nan")
     Hsx, Hsy = Hs/np.nanmax(Hs) * np.sin(np.radians(Dir)), -Hs/np.nanmax(Hs) * np.cos(np.radians(Dir))
 
-    idxZoom = np.logical_or(np.logical_or(np.logical_or(malla.x<zoom[0],malla.x>zoom[1]),malla.y<zoom[2]),malla.y>zoom[3])
+    idxZoom = np.logical_or(np.logical_or(np.logical_or(mesh.x<zoom[0],mesh.x>zoom[1]),mesh.y<zoom[2]),mesh.y>zoom[3])
     Hs[idxZoom] = float("nan")
     Hsx[idxZoom] = float("nan")
-    Hsx[malla.z <= -seaLvl] = float("nan")
+    Hsx[mesh.z <= -seaLvl] = float("nan")
     Hsy[idxZoom] = float("nan")
-    Hsy[malla.z <= -seaLvl] = float("nan")
+    Hsy[mesh.z <= -seaLvl] = float("nan")
 
     
-    rot = Hs / (malla.z + seaLvl)
+    rot = Hs / (mesh.z + seaLvl)
     HsRot = Hs
     HsRot[np.logical_or(rot>0.7, rot<0.4)] = float("nan")
 
@@ -339,15 +338,15 @@ def graphBrk(malla, caseConfig, graphConfig):
     plt.imshow(img, extent = corners)
     # #%% Bathy
     # levelsCont = [-4, -2, -1, 0, 1,  2,  3,  4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 20]
-    # plt.contour(XX,YY,malla.z, levelsCont, linewidths = 1, cmap='Blues')
+    # plt.contour(XX,YY,mesh.z, levelsCont, linewidths = 1, cmap='Blues')
     # #%% end Bathy
-    plt.contourf(malla.x, malla.y, HsRot, levels, vmin=min(
+    plt.contourf(mesh.x, mesh.y, HsRot, levels, vmin=min(
         levels), vmax=max(levels), cmap=cmapHs, extend='both',alpha=1) #/np.nanmax(HsRot)
     plt.clim(min(levels), max(levels))
     color_bar = plt.colorbar(ticks=tks)
     color_bar.minorticks_on()
     color_bar.set_label(label=r'$H_s \ at \ Breaking$ [m]', weight='bold', size=10)
-    # plt.quiver(malla.x[0::spcH,0::spcV],malla.y[0::spcH,0::spcV],Hsx[0::spcH,0::spcV],
+    # plt.quiver(mesh.x[0::spcH,0::spcV],mesh.y[0::spcH,0::spcV],Hsx[0::spcH,0::spcV],
     #         Hsy[0::spcH,0::spcV],
     #         scale=arrowScale,
     #         width= arrowWidth,
