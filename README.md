@@ -5,9 +5,8 @@ Package for read and vizualize SMC simulations results.
 ## :house: Local installation
 * Using conda + pip:
 ```bash
-# Create conda env and install python libreries
 
-# pip install git+https://github.com/defreitasL/SMCResultPlotHub.git
+pip install git+https://github.com/defreitasL/SMCResultPlotHub.git
 
 ```
 
