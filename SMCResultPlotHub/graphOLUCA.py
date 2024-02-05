@@ -7,6 +7,7 @@ Created on Mon Feb 20 14:07:49 2023
 import numpy as np
 import matplotlib.pyplot as plt
 import dxfgrabber
+from SMCResultPlotHub.readData import readData, readDataCOPLA
 # AA = [H, T, SL, DIR]
 
 def graphHsDir(mesh, caseConfig, graphConfig):
